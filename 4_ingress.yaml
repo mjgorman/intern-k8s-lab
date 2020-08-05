@@ -1,0 +1,15 @@
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1beta1
+metadata:
+  name: testapp
+spec:
+  rules:
+    - host: testapp.local
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: testapp-int
+              servicePort: 5000
+

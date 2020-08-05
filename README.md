@@ -85,6 +85,24 @@ Typically this would be higher effort with a real cluster, but we're going to ch
 ```bash
 minikube addons enable ingress
 ```
-This will do the heavy lifting of seting up the ingress controller ourselves, and we can focus on just the ingress rules. 
+This will do the heavy lifting of seting up the ingress controller ourselves, and we can focus on just the ingress rules and results. 
+
+# Create our first ingess rule
+```bash
+kubectl apply -f 4_ingress.yaml
+```
+
+# Access the app via ingress controller
+Enter the IP you used previously to access the application via NodePort into your browser but don't enter the port number, you'll use the default of port 80 that all websites use for http connections. You should get a 404 Not Found from Nginx.
 
 
+Now place that IPs your pod and add it to your /etc/hosts file with a hostname of testapp.local, leaving out the port designation it should look similar to:
+```bash
+192.168.64.2 testapp.local
+```
+Now in your browser enter testapp.local to access You're now viewing you application pods through the ingress controller and the rule you created. 
+
+# Experiment
+Now is the time to experiment. Use what you've learned to add new services, use ingress rules to route traffic to one vs the other.
+
+Go find another docker container to run, create it as a deployment. Give it an internal service and ingress rule based on a new hostname. Use another entry in your /etc/hosts file to route that hostname to the VM IP and test accessing both running services via different names.  
